@@ -8,7 +8,7 @@ def style_game(wind = WIN, color = consts.GREEN):
     wind.fill(color)
     pygame.display.update()
 
-def main():
+"""def main():
     clock = pygame.time.Clock()
     state = True
     style_game()
@@ -29,4 +29,4 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    main()"""

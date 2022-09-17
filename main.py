@@ -1,5 +1,9 @@
 import pygame
-black = (0, 0, 0)
+import screen
+import consts
+
+FPS = 60
+"""black = (0, 0, 0)
 white = (255, 255, 255)
 
 red = (255, 0, 0)
@@ -13,7 +17,7 @@ for row in range(10):
         grid[row].append(0)
 grid[1][5] = 1
 pygame.init()
-window_size = [255, 255]
+window_size = [1000, 500]
 scr = pygame.display.set_mode(window_size)
 pygame.display.set_caption("Grid")
 done = False
@@ -42,4 +46,26 @@ while not done:
                               HEIGHT])
     clock.tick(50)
     pygame.display.flip()
-pygame.quit()
+pygame.quit()"""
+
+
+def main():
+    clock = pygame.time.Clock()
+    state = True
+    screen.style_game()
+    while state:
+        clock.tick(FPS)
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                state = False
+        key_pressed = pygame.key.get_pressed()
+        if key_pressed[pygame.K_RETURN]:
+            screen.style_game(color=consts.BLACK)
+            pygame.time.wait(1000)
+            screen.style_game()
+
+    pygame.quit()
+
+
+if __name__ == "__main__":
+    main()
