@@ -21,8 +21,7 @@ def main():
                 state['state'] = False
             elif event.type == pygame.KEYDOWN or event.type == pygame.KEYUP:
                 Soldier.soldier_move(key_pressed, state['soldier_rect'])
-
-        screen.screen_color_change(key_pressed, state['soldier_rect'])
+            screen.screen_color_change(key_pressed, state['soldier_rect'])
 
         if MineField.player_win(state['soldier_rect'].x, state['soldier_rect'] .y):
             print('win') # chang to new screen
