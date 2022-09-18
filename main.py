@@ -3,7 +3,7 @@ import screen
 import consts
 import Soldier
 import MineField
-
+import time
 
 state = {'state': True,
          'mine_field': MineField.init_mine_field(MineField.MINE_FIELD_MATRIX, consts.MINE_FILE, consts.NUM_LAND_MINES),
@@ -15,18 +15,15 @@ def main():
     state['soldier_rect'] = pygame.Rect(0, 0, consts.PLAYER_SIZE[0],consts.PLAYER_SIZE[1])
     while state['state']:
         clock.tick(consts.FPS)
-        key_pressed = pygame.key.get_pressed()
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 state['state'] = False
-            elif event.type == pygame.KEYDOWN or event.type == pygame.KEYUP:
-                Soldier.soldier_move(key_pressed, state['soldier_rect'])
-
+        key_pressed = pygame.key.get_pressed()
         screen.screen_color_change(key_pressed, state['soldier_rect'])
-
+        Soldier.soldier_move(key_pressed, state['soldier_rect'])
         if MineField.player_win(state['soldier_rect'].x, state['soldier_rect'] .y):
             print('win') # chang to new screen
-            pygame.time.wait(3000)
+            time.sleep(3)
             state['state'] = False
 
 
