@@ -6,6 +6,7 @@ import MineField
 
 state = {'state': True, 'mine_field': MineField.init_mine_field(), 'grass': None, 'soldier_rect': None}
 
+
 def main():
     clock = pygame.time.Clock()
     state['soldier_rect'] = pygame.Rect(0, 0, consts.PLAYER_SIZE[0],consts.PLAYER_SIZE[1])
