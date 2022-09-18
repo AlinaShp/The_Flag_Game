@@ -22,6 +22,8 @@ def style_game(color, soldier_rect, grass_field):
     WIN.fill(color)
     WIN.blit(SOLDIER_OBJ, (soldier_rect.x, soldier_rect.y))
     WIN.blit(FLAG_OBJ, (consts.FLAG_LOCATION[0], consts.FLAG_LOCATION[1]))
+    if(soldier_rect.x==0 and soldier_rect.y==0):
+        begin_msg()
     draw_grass(grass_field)
     pygame.display.update()
 
@@ -54,8 +56,6 @@ def message_screen(str_state):
                               consts.BLACK)
 
     WIN.blit(textsurface, textsurface.get_rect(center=WIN.get_rect().center))
-
-
     pygame.display.update()
 
 
