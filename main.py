@@ -4,8 +4,7 @@ import consts
 import Soldier
 import MineField
 
-state = {'state': True, 'mine_field': None, 'grass': None, 'soldier_rect': None}
-
+state = {'state': True, 'mine_field': MineField.init_mine_field(), 'grass': None, 'soldier_rect': None}
 
 def main():
     clock = pygame.time.Clock()
