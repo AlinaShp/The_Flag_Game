@@ -2,32 +2,31 @@ import consts
 import random
 
 MINE_FIELD_MATRIX = []
+GRASS_FIELD_MATRIX = []
 
 
-def insert_to_mine_field(new_obj, num_obj):
+def insert_to_mine_field(filed, new_obj, num_obj):
     count = 0
     while num_obj != count:
         random_x = random.randint(0, consts.SCREEN_GRID_HEIGHT-1)
         random_y = random.randint(0, consts.SCREEN_GRID_WIDTH-1)
-        if MINE_FIELD_MATRIX[random_x][random_y] == consts.FREE:
-            MINE_FIELD_MATRIX[random_x][random_y] = new_obj
+        if filed[random_x][random_y] == consts.FREE:
+            filed[random_x][random_y] = new_obj
             count += 1
-    return MINE_FIELD_MATRIX
+    return filed
 
 
-def create_mine_field():
+def create_field(filed):
     for row in range(consts.SCREEN_GRID_HEIGHT):
         temp_list = []
         for col in range(consts.SCREEN_GRID_WIDTH):
             temp_list.append(consts.FREE)
-        MINE_FIELD_MATRIX.append(temp_list)
-    return MINE_FIELD_MATRIX
+        filed.append(temp_list)
+    return filed
 
 
-def init_mine_field():
-    create_mine_field()
-    insert_to_mine_field()
-    return MINE_FIELD_MATRIX
+def init_mine_field(matrix, new_obj, num_obj):
+    return insert_to_mine_field(create_field(matrix), new_obj, num_obj)
 
 
 def player_win(player_x, player_y):
