@@ -1,7 +1,7 @@
 import pygame
 import screen
 import consts
-
+import Soldier
 FPS = 60
 """black = (0, 0, 0)
 white = (255, 255, 255)
@@ -52,17 +52,15 @@ pygame.quit()"""
 def main():
     clock = pygame.time.Clock()
     state = True
-    screen.style_game()
+    soldier_rect = pygame.Rect(0, 0, consts.PLAYER_SIZE[0],consts.PLAYER_SIZE[1])
     while state:
         clock.tick(FPS)
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 state = False
         key_pressed = pygame.key.get_pressed()
-        if key_pressed[pygame.K_RETURN]:
-            screen.style_game(color=consts.BLACK)
-            pygame.time.wait(1000)
-            screen.style_game()
+        screen.screen_color_change(key_pressed, soldier_rect)
+        Soldier.soldier_move(key_pressed, soldier_rect)
 
     pygame.quit()
 

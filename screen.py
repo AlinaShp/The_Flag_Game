@@ -1,6 +1,8 @@
 import os.path
 
 import pygame
+
+import Soldier
 import consts
 
 pygame.display.set_caption('the flag game')
@@ -16,6 +18,13 @@ def style_game(color, soldier_rect):
     WIN.blit(SOLDIER_OBJ, (soldier_rect.x, soldier_rect.y))
     pygame.display.update()
 
+def screen_color_change(key_pressed ,soldier_rect):
+    style_game(consts.GREEN, soldier_rect)
+    if key_pressed[pygame.K_RETURN]:
+        style_game(consts.BLACK, soldier_rect)
+        pygame.time.wait(1000)
+        style_game(consts.GREEN, soldier_rect)
+
 
 def main():
     clock = pygame.time.Clock()
@@ -26,23 +35,10 @@ def main():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 state = False
-        style_game(consts.GREEN, soldier_rect)
         key_pressed = pygame.key.get_pressed()
-        if key_pressed[pygame.K_RETURN]:
-            style_game(consts.BLACK, soldier_rect)
-            pygame.time.wait(1000)
-            style_game(consts.GREEN, soldier_rect)
-        if key_pressed[pygame.K_DOWN]:
-            soldier_rect.y += consts.CELL_SIZE
-        if key_pressed[pygame.K_UP]:
-            soldier_rect.y -= consts.CELL_SIZE
-        if key_pressed[pygame.K_LEFT]:
-            soldier_rect.x -= consts.CELL_SIZE
-        if key_pressed[pygame.K_RIGHT]:
-            soldier_rect.x += consts.CELL_SIZE
+        screen_color_change(key_pressed, soldier_rect)
+        Soldier.soldier_move(key_pressed, soldier_rect)
 
-        """if key_pressed[pygame.K_DOWN]:
-            style_game()"""
 
     pygame.quit()
 
