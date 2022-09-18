@@ -28,3 +28,9 @@ def init_mine_field():
     create_mine_field()
     insert_mine_field()
     return MINE_FIELD_MATRIX
+
+
+def player_win(player_x, player_y):
+    return player_x+consts.PLAYER_SIZE[0] >= consts.FLAG_LOCATION[0] and\
+           player_y+consts.PLAYER_SIZE[1] >= consts.FLAG_LOCATION[1]
+
