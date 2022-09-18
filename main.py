@@ -18,6 +18,8 @@ def main():
     clock = pygame.time.Clock()
     state['soldier_rect'] = pygame.Rect(0, 0, consts.PLAYER_SIZE[0],
                                         consts.PLAYER_SIZE[1])
+    screen.begin_msg()
+
     while state['state']:
         clock.tick(consts.FPS)
         key_pressed = pygame.key.get_pressed()
@@ -31,11 +33,11 @@ def main():
 
 
         if Soldier.player_win(state['soldier_rect'].x, state['soldier_rect'] .y):
-            screen.message_screen("win")
+            screen.message_screen("YOU WON!")
             pygame.time.wait(3000)
             state['state'] = False
         elif Soldier.player_loss(state['mine_field'], state['soldier_rect'].x, state['soldier_rect'].y):
-            screen.message_screen("lose")
+            screen.message_screen("You lost :(")
             pygame.time.wait(3000)
             state['state'] = False
 

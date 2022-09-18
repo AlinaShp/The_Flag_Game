@@ -1,13 +1,13 @@
 import os.path
 import pygame
 import tkinter
+import sys
 import MineField
 import Soldier
 import consts
-
+pygame.init()
 pygame.display.set_caption('the flag game')
 WIN = pygame.display.set_mode((consts.SCREEN_WIDTH, consts.SCREEN_HEIGHT))
-FPS = 30
 SOLDIER_IMG = pygame.image.load(os.path.join('soldier.png'))
 SOLDIER_OBJ = pygame.transform.scale(SOLDIER_IMG, (80, 80))
 FLAG_IMG = pygame.image.load(os.path.join('flag.png'))
@@ -23,8 +23,13 @@ def style_game(color, soldier_rect, grass_field):
     WIN.blit(SOLDIER_OBJ, (soldier_rect.x, soldier_rect.y))
     WIN.blit(FLAG_OBJ, (consts.FLAG_LOCATION[0], consts.FLAG_LOCATION[1]))
     draw_grass(grass_field)
-
     pygame.display.update()
+
+def begin_msg():
+    font = pygame.font.Font(None, 30)
+    textsurface = font.render('Welcome to the flag game\n Have fun!', False, consts.WHITE)
+    WIN.blit(textsurface,(80, 0))
+
 
 
 def style_game_black(color, soldier_rect):
@@ -43,18 +48,18 @@ def screen_color_change(key_pressed, soldier_rect, mine_field, grass_field):
         style_game(consts.GREEN, soldier_rect, grass_field)
 
 def message_screen(str_state):
-    FONT = "Calibri"
-    FONT_SIZE = 30
-    root = tkinter.Tk()
-    root.geometry("300x200")
-    root.title("Message")
-    if(str_state=="win"):
-        state="YOU WON!"
-    else:
-        state="You lost :("
-    line1_label = tkinter.Label(root, text=state, font=(FONT, FONT_SIZE))
-    line1_label.place(x=60, y=60)
-    root.mainloop()
+    WIN.fill(consts.WHITE)
+    font = pygame.font.Font(None, 90)
+    textsurface = font.render(str_state, False,
+                              consts.BLACK)
+
+    WIN.blit(textsurface, textsurface.get_rect(center=WIN.get_rect().center))
+
+
+    pygame.display.update()
+
+
+
 
 
 
@@ -66,7 +71,6 @@ def make_grid():
 
 
 def draw_mines(mine_field):
-   # mine_field = MineField.MINE_FIELD_MATRIX
     for row in range(consts.SCREEN_GRID_HEIGHT):
         for col in range(consts.SCREEN_GRID_WIDTH):
             if mine_field[row][col] == consts.MINE_FILE:
@@ -76,7 +80,6 @@ def draw_mines(mine_field):
 
 
 def draw_grass(grass_field):
-   # grass_field = MineField.GRASS_FIELD_MATRIX
     for row in range(consts.SCREEN_GRID_HEIGHT):
         for col in range(consts.SCREEN_GRID_WIDTH):
             if grass_field[row][col] == consts.GRASS:
