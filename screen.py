@@ -1,6 +1,6 @@
 import os.path
 import pygame
-
+import tkinter
 import MineField
 import Soldier
 import consts
@@ -42,6 +42,17 @@ def screen_color_change(key_pressed, soldier_rect, mine_field, grass_field):
         pygame.time.wait(1000)
         style_game(consts.GREEN, soldier_rect, grass_field)
 
+def message_screen():
+    FONT = "Calibri"
+    FONT_SIZE = 30
+    root = tkinter.Tk()
+    root.geometry("300x200")
+    root.title("Message")
+    line1_label = tkinter.Label(root, text="YOU WON!", font=(FONT, FONT_SIZE))
+    line1_label.place(x=60, y=60)
+    root.mainloop()
+
+
 
 def make_grid():
     for i in range(0, consts.SCREEN_WIDTH, consts.CELL_SIZE):
@@ -70,22 +81,4 @@ def draw_grass(grass_field):
     pygame.display.update()
 
 
-def main():
-    clock = pygame.time.Clock()
-    state = True
-    soldier_rect = pygame.Rect(0, 0, consts.PLAYER_SIZE[0],
-                               consts.PLAYER_SIZE[1])
-    while state:
-        clock.tick(FPS)
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                state = False
-        key_pressed = pygame.key.get_pressed()
-        screen_color_change(key_pressed, soldier_rect)
-        Soldier.soldier_move(key_pressed, soldier_rect)
 
-    pygame.quit()
-
-
-if __name__ == "__main__":
-    main()
