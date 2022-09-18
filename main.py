@@ -9,7 +9,7 @@ state = {'state': True,
          'mine_field': MineField.init_mine_field(MineField.MINE_FIELD_MATRIX, consts.MINE_FILE, consts.NUM_LAND_MINES),
          'grass': MineField.init_mine_field(MineField.GRASS_FIELD_MATRIX, consts.GRASS, consts.NUM_GRASS),
          'soldier_rect': None}
-print(MineField.MINE_FIELD_MATRIX)
+
 def main():
     clock = pygame.time.Clock()
     state['soldier_rect'] = pygame.Rect(0, 0, consts.PLAYER_SIZE[0],consts.PLAYER_SIZE[1])
@@ -23,8 +23,12 @@ def main():
                 Soldier.soldier_move(key_pressed, state['soldier_rect'])
             screen.screen_color_change(key_pressed, state['soldier_rect'])
 
-        if MineField.player_win(state['soldier_rect'].x, state['soldier_rect'] .y):
+        if Soldier.player_win(state['soldier_rect'].x, state['soldier_rect'] .y):
             print('win') # chang to new screen
+            pygame.time.wait(3000)
+            state['state'] = False
+        elif Soldier.player_loss(state['mine_field'], state['soldier_rect'].x, state['soldier_rect'].y):
+            print('lost')  # chang to new screen
             pygame.time.wait(3000)
             state['state'] = False
 

@@ -29,7 +29,8 @@ def init_mine_field(matrix, new_obj, num_obj):
     return insert_to_mine_field(create_field(matrix), new_obj, num_obj)
 
 
-def player_win(player_x, player_y):
-    return player_x+consts.PLAYER_SIZE[0] >= consts.FLAG_LOCATION[0] and\
-           player_y+consts.PLAYER_SIZE[1] >= consts.FLAG_LOCATION[1]
+def get_lend_mine_position(index_row, index_col):
+    return index_row*consts.CELL_SIZE, index_col*consts.CELL_SIZE
+
+
 
