@@ -11,3 +11,4 @@ def soldier_move(key_pressed, soldier_rect):
         soldier_rect.x -= consts.CELL_SIZE
     if key_pressed[pygame.K_RIGHT] and soldier_rect.x + consts.CELL_SIZE < consts.SCREEN_WIDTH-20:
         soldier_rect.x += consts.CELL_SIZE
+       #soldier_rect.x += 5
