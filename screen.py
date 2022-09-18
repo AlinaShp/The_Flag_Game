@@ -7,7 +7,7 @@ import consts
 
 pygame.display.set_caption('the flag game')
 WIN = pygame.display.set_mode((consts.SCREEN_WIDTH, consts.SCREEN_HEIGHT))
-FPS = 60
+FPS = 30
 SOLDIER_IMG = pygame.image.load(os.path.join('soldier.png'))
 SOLDIER_OBJ = pygame.transform.scale(SOLDIER_IMG, consts.PLAYER_SIZE)
 FLAG_IMG = pygame.image.load(os.path.join('flag.png'))
@@ -43,11 +43,14 @@ def make_grid():
 
 
 def draw_mines():
-    mine_field = MineField.init_mine_field()
+    mine_field = MineField.init_mine_field(MineField.MINE_FIELD_MATRIX, consts.MINE_FILE, consts.NUM_LAND_MINES)
     for row in range(consts.SCREEN_GRID_HEIGHT):
         for col in range(consts.SCREEN_GRID_WIDTH):
             if mine_field[row][col] == consts.MINE_FILE:
-                WIN.blit(MINE_OBJ, (col * 20, row * 20))
+                WIN.blit(MINE_OBJ, (col * consts.CELL_SIZE, row * consts.CELL_SIZE))
+
+#def draw_grass():
+
 
 
 def main():
