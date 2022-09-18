@@ -16,7 +16,7 @@ def insert_mine_field():
 
 
 def create_mine_field():
-    for row in  range(consts.SCREEN_GRID_HEIGHT):
+    for row in range(consts.SCREEN_GRID_HEIGHT):
         temp_list = []
         for col in range(consts.SCREEN_GRID_WIDTH):
             temp_list.append(consts.FREE)
