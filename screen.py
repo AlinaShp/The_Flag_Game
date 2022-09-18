@@ -1,5 +1,7 @@
 import os.path
 import pygame
+
+import MineField
 import Soldier
 import consts
 
@@ -10,12 +12,16 @@ SOLDIER_IMG = pygame.image.load(os.path.join('soldier.png'))
 SOLDIER_OBJ = pygame.transform.scale(SOLDIER_IMG, consts.PLAYER_SIZE)
 FLAG_IMG = pygame.image.load(os.path.join('flag.png'))
 FLAG_OBJ = pygame.transform.scale(FLAG_IMG, consts.FLAG_SIZE)
+MINE_IMG = pygame.image.load(os.path.join('mine.png'))
+MINE_OBJ = pygame.transform.scale(MINE_IMG, consts.LAND_MINES_SIZE)
 
 
 def style_game(color, soldier_rect):
     WIN.fill(color)
     WIN.blit(SOLDIER_OBJ, (soldier_rect.x, soldier_rect.y))
     WIN.blit(FLAG_OBJ, (consts.FLAG_LOCATION[0], consts.FLAG_LOCATION[1]))
+    WIN.blit(MINE_OBJ, (100, 100))
+
     pygame.display.update()
 
 
@@ -24,15 +30,24 @@ def screen_color_change(key_pressed, soldier_rect):
     if key_pressed[pygame.K_RETURN]:
         style_game(consts.BLACK, soldier_rect)
         make_grid()
+        draw_mines()
         pygame.time.wait(1000)
         style_game(consts.GREEN, soldier_rect)
 
 
 def make_grid():
-    for i in range(0, 900, 50):
-        pygame.draw.line(WIN, (255, 255, 255), (0, i), (900, i))
-        pygame.draw.line(WIN, (255, 255, 255), (i, 0), (i, 900))
+    for i in range(0, consts.SCREEN_WIDTH, consts.CELL_SIZE):
+        pygame.draw.line(WIN, consts.WHITE, (0, i), (consts.SCREEN_WIDTH, i))
+        pygame.draw.line(WIN, consts.WHITE, (i, 0), (i, consts.SCREEN_WIDTH))
     pygame.display.update()
+
+
+def draw_mines():
+    mine_field = MineField.init_mine_field()
+    for row in range(consts.SCREEN_GRID_HEIGHT):
+        for col in range(consts.SCREEN_GRID_WIDTH):
+            if mine_field[row][col] == consts.MINE_FILE:
+                WIN.blit(MINE_OBJ, (col * 20, row * 20))
 
 
 def main():
