@@ -16,11 +16,6 @@ def soldier_move(key_pressed, soldier_rect):
         soldier_rect.x += consts.CELL_SIZE
 
 
-<<<<<<< HEAD
-=======
-
-
->>>>>>> 86224391cbbdf14ae8c0e7062fff17eed05017bb
 def get_feet_position(soldier_x, soldier_y):
     feet_x = soldier_x
     feet_y = soldier_y + consts.PLAYER_SIZE[1] - consts.CELL_SIZE
