@@ -1,15 +1,13 @@
 import os.path
 import pygame
 import tkinter
-import MineField
-import Soldier
 import consts
+
 
 pygame.display.set_caption('the flag game')
 WIN = pygame.display.set_mode((consts.SCREEN_WIDTH, consts.SCREEN_HEIGHT))
-FPS = 30
 SOLDIER_IMG = pygame.image.load(os.path.join('soldier.png'))
-SOLDIER_OBJ = pygame.transform.scale(SOLDIER_IMG, (80, 80))
+SOLDIER_OBJ = pygame.transform.scale(SOLDIER_IMG,consts.PLAYER_IMG_SIZE)
 FLAG_IMG = pygame.image.load(os.path.join('flag.png'))
 FLAG_OBJ = pygame.transform.scale(FLAG_IMG, consts.FLAG_SIZE)
 MINE_IMG = pygame.image.load(os.path.join('mine.png'))
@@ -18,12 +16,13 @@ GRASS_IMG = pygame.image.load(os.path.join('grass.png'))
 GRASS_OBJ = pygame.transform.scale(GRASS_IMG, consts.GRASS_SIZE)
 
 
-def style_game(color, soldier_rect, grass_field):
+def style_game(color, soldier_rect, grass_field, msg = ''):
+
     WIN.fill(color)
     WIN.blit(SOLDIER_OBJ, (soldier_rect.x, soldier_rect.y))
     WIN.blit(FLAG_OBJ, (consts.FLAG_LOCATION[0], consts.FLAG_LOCATION[1]))
     draw_grass(grass_field)
-
+    # write text
     pygame.display.update()
 
 
@@ -83,6 +82,4 @@ def draw_grass(grass_field):
                 WIN.blit(GRASS_OBJ,
                          (col * consts.CELL_SIZE, row * consts.CELL_SIZE))
     pygame.display.update()
-
-
 
