@@ -5,7 +5,7 @@ import Soldier
 import MineField
 import time
 
-state = {'state': True, 'mine_field': MineField.init_mine_field(), 'grass': None, 'soldier_rect': None}
+state = {'state': True, 'mine_field': MineField.init_mine_field(consts.MINE_FILE, consts.NUM_LAND_MINES), 'grass': None, 'soldier_rect': None}
 
 
 def main():
