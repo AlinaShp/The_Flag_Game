@@ -14,21 +14,26 @@ FLAG_IMG = pygame.image.load(os.path.join('flag.png'))
 FLAG_OBJ = pygame.transform.scale(FLAG_IMG, consts.FLAG_SIZE)
 MINE_IMG = pygame.image.load(os.path.join('mine.png'))
 MINE_OBJ = pygame.transform.scale(MINE_IMG, consts.LAND_MINES_SIZE)
+GRASS_IMG = pygame.image.load(os.path.join('grass.png'))
+GRASS_OBJ = pygame.transform.scale(GRASS_IMG, consts.GRASS_SIZE)
 
 
 def style_game(color, soldier_rect):
     WIN.fill(color)
     WIN.blit(SOLDIER_OBJ, (soldier_rect.x, soldier_rect.y))
+    draw_grass()
     WIN.blit(FLAG_OBJ, (consts.FLAG_LOCATION[0], consts.FLAG_LOCATION[1]))
-    WIN.blit(MINE_OBJ, (100, 100))
-
     pygame.display.update()
 
+def style_game_black(color, soldier_rect):
+    WIN.fill(color)
+    WIN.blit(SOLDIER_OBJ, (soldier_rect.x, soldier_rect.y))
+    pygame.display.update()
 
 def screen_color_change(key_pressed, soldier_rect):
     style_game(consts.GREEN, soldier_rect)
     if key_pressed[pygame.K_RETURN]:
-        style_game(consts.BLACK, soldier_rect)
+        style_game_black(consts.BLACK, soldier_rect)
         make_grid()
         draw_mines()
         pygame.time.wait(1000)
@@ -43,13 +48,21 @@ def make_grid():
 
 
 def draw_mines():
-    mine_field = MineField.init_mine_field(MineField.MINE_FIELD_MATRIX, consts.MINE_FILE, consts.NUM_LAND_MINES)
+    mine_field = MineField.MINE_FIELD_MATRIX
     for row in range(consts.SCREEN_GRID_HEIGHT):
         for col in range(consts.SCREEN_GRID_WIDTH):
             if mine_field[row][col] == consts.MINE_FILE:
                 WIN.blit(MINE_OBJ, (col * consts.CELL_SIZE, row * consts.CELL_SIZE))
+    pygame.display.update()
 
-#def draw_grass():
+
+def draw_grass():
+    grass_field=MineField.GRASS_FIELD_MATRIX
+    for row in range(consts.SCREEN_GRID_HEIGHT):
+        for col in range(consts.SCREEN_GRID_WIDTH):
+            if grass_field[row][col] == consts.GRASS:
+                WIN.blit(GRASS_OBJ, (col * consts.CELL_SIZE, row * consts.CELL_SIZE))
+    pygame.display.update()
 
 
 

@@ -5,14 +5,22 @@ import consts
 def soldier_move(key_pressed, soldier_rect):
     if key_pressed[pygame.K_DOWN] and soldier_rect.y + consts.CELL_SIZE < consts.SCREEN_HEIGHT-60:
         soldier_rect.y += consts.CELL_SIZE
+
     if key_pressed[pygame.K_UP] and soldier_rect.y - consts.CELL_SIZE > 0:
         soldier_rect.y -= consts.CELL_SIZE
+
     if key_pressed[pygame.K_LEFT] and soldier_rect.x - consts.CELL_SIZE > 0:
         soldier_rect.x -= consts.CELL_SIZE
+
     if key_pressed[pygame.K_RIGHT] and soldier_rect.x + consts.CELL_SIZE < consts.SCREEN_WIDTH-20:
         soldier_rect.x += consts.CELL_SIZE
 
 
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 86224391cbbdf14ae8c0e7062fff17eed05017bb
 def get_feet_position(soldier_x, soldier_y):
     feet_x = soldier_x
     feet_y = soldier_y + consts.PLAYER_SIZE[1] - consts.CELL_SIZE

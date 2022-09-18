@@ -9,7 +9,7 @@ state = {'state': True,
          'mine_field': MineField.init_mine_field(MineField.MINE_FIELD_MATRIX, consts.MINE_FILE, consts.NUM_LAND_MINES),
          'grass': MineField.init_mine_field(MineField.GRASS_FIELD_MATRIX, consts.GRASS, consts.NUM_GRASS),
          'soldier_rect': None}
-
+print(MineField.MINE_FIELD_MATRIX)
 def main():
     clock = pygame.time.Clock()
     state['soldier_rect'] = pygame.Rect(0, 0, consts.PLAYER_SIZE[0],consts.PLAYER_SIZE[1])
