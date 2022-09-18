@@ -29,22 +29,14 @@ def main():
             screen.screen_color_change(key_pressed, state['soldier_rect'],
                                        state['mine_field'], state['grass'])
 
-<<<<<<< HEAD
-        if MineField.player_win(state['soldier_rect'].x,
-                                state['soldier_rect'].y):
-            screen.message_screen()
-            print('win')  # chang to new screen
-            time.sleep(3)
-=======
 
         if Soldier.player_win(state['soldier_rect'].x, state['soldier_rect'] .y):
-            print('win') # chang to new screen
+            screen.message_screen("win")
             pygame.time.wait(3000)
             state['state'] = False
         elif Soldier.player_loss(state['mine_field'], state['soldier_rect'].x, state['soldier_rect'].y):
-            print('lost')  # chang to new screen
+            screen.message_screen("lose")
             pygame.time.wait(3000)
->>>>>>> 109810608e1900cddda9241568141fc69908f9d2
             state['state'] = False
 
 

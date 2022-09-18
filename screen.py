@@ -42,13 +42,17 @@ def screen_color_change(key_pressed, soldier_rect, mine_field, grass_field):
         pygame.time.wait(1000)
         style_game(consts.GREEN, soldier_rect, grass_field)
 
-def message_screen():
+def message_screen(str_state):
     FONT = "Calibri"
     FONT_SIZE = 30
     root = tkinter.Tk()
     root.geometry("300x200")
     root.title("Message")
-    line1_label = tkinter.Label(root, text="YOU WON!", font=(FONT, FONT_SIZE))
+    if(str_state=="win"):
+        state="YOU WON!"
+    else:
+        state="You lost :("
+    line1_label = tkinter.Label(root, text=state, font=(FONT, FONT_SIZE))
     line1_label.place(x=60, y=60)
     root.mainloop()
 
