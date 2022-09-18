@@ -1,9 +1,6 @@
 import consts
 import random
 
-MINE_FIELD_MATRIX = []
-GRASS_FIELD_MATRIX = []
-
 
 def insert_to_mine_field(filed, new_obj, num_obj):
     count = 0
@@ -16,7 +13,8 @@ def insert_to_mine_field(filed, new_obj, num_obj):
     return filed
 
 
-def create_field(filed):
+def create_field():
+    filed = []
     for row in range(consts.SCREEN_GRID_HEIGHT):
         temp_list = []
         for col in range(consts.SCREEN_GRID_WIDTH):
@@ -25,8 +23,8 @@ def create_field(filed):
     return filed
 
 
-def init_mine_field(matrix, new_obj, num_obj):
-    return insert_to_mine_field(create_field(matrix), new_obj, num_obj)
+def init_mine_field(new_obj, num_obj):
+    return insert_to_mine_field(create_field(), new_obj, num_obj)
 
 
 def get_lend_mine_position(index_row, index_col):
