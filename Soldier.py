@@ -30,7 +30,7 @@ def get_feet_position(soldier_x, soldier_y):
 def did_hit_lend_mine(solider_feet_position, mine_position):
     return solider_feet_position[1] == mine_position[1] and \
            (solider_feet_position[0] == mine_position[0] or
-            solider_feet_position[0] == mine_position[0] + consts.CELL_SIZE)
+            solider_feet_position[0] == mine_position[0] - consts.CELL_SIZE)
 
 
 def player_loss(land_mains_matrix, solider_position_x, solider_position_y):

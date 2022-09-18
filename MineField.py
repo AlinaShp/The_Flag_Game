@@ -30,7 +30,7 @@ def init_mine_field(matrix, new_obj, num_obj):
 
 
 def get_lend_mine_position(index_row, index_col):
-    return index_row*consts.CELL_SIZE, index_col*consts.CELL_SIZE
+    return index_col*consts.CELL_SIZE, index_row*consts.CELL_SIZE
 
 
 
