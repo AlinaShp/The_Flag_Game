@@ -50,7 +50,6 @@ def screen_color_change(key_pressed, soldier_rect, mine_field, grass_field):
         style_game_black(consts.BLACK, soldier_rect)
         make_grid()
         draw_objects(mine_field, MINE_OBJ, consts.LAND_MINE)
-        #draw_mines(mine_field)
         pygame.time.wait(1000)
         style_game(consts.GREEN, soldier_rect, grass_field)
 
@@ -68,21 +67,6 @@ def make_grid():
         pygame.draw.line(WIN, consts.WHITE, (i, 0), (i, consts.SCREEN_WIDTH))
     pygame.display.update()
 
-
-# def draw_mines(mine_field):
-#     for row in range(consts.SCREEN_GRID_HEIGHT):
-#         for col in range(consts.SCREEN_GRID_WIDTH):
-#             if mine_field[row][col] == consts.MINE_FILE:
-#                 WIN.blit(MINE_OBJ,(col * consts.CELL_SIZE, row * consts.CELL_SIZE))
-#     pygame.display.update()
-
-
-# def draw_grass(grass_field):
-#     for row in range(consts.SCREEN_GRID_HEIGHT):
-#         for col in range(consts.SCREEN_GRID_WIDTH):
-#             if grass_field[row][col] == consts.GRASS:
-#                 WIN.blit(GRASS_OBJ,(col * consts.CELL_SIZE, row * consts.CELL_SIZE))
-#     pygame.display.update()
 
 
 def draw_objects(field, img_obj, obj_const):
