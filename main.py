@@ -16,14 +16,16 @@ def main():
     while state['state']:
         clock.tick(consts.FPS)
         key_pressed = pygame.key.get_pressed()
-        key_state = pygame.key.get_pressed()
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 state['state'] = False
             elif event.type == pygame.KEYDOWN or event.type == pygame.KEYUP:
                 Soldier.soldier_move(key_pressed, state['soldier_rect'])
                 screen.style_game(consts.GREEN, state['soldier_rect'], state['grass'])
-                screen.pressing_numbers(key_pressed, k)
+                if screen.cond(key_pressed):
+                    print(screen.pressing_numbers(key_pressed))
+
+
 
             screen.screen_color_change(key_pressed, state['soldier_rect'], state['mine_field'], state['grass'])
 
