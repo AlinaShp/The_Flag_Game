@@ -17,7 +17,7 @@ field_names = ['key_pressed', 'mine_field', 'grass',
                'soliderPosition']
 
 
-def init_data_base(game_data):
+def init_data_base():
     if not os.path.exists(DATA_BASE_NAME):
         df = pandas.DataFrame(data,
                               columns=['key_pressed', 'mine_field', 'grass',
@@ -75,7 +75,7 @@ def save_game(game_data):
         df.to_csv(DATA_BASE_NAME, mode='w', header=False)
     new_data_frame.to_csv(DATA_BASE_NAME, mode='a', header=False)"""
 
-# init_data_base()
+init_data_base()
 
 save_game({'key_pressed': 4, 'mine_field': [[1, 1], [1, 1]],
                 'grass': [[1, 1], [1, 1]], 'soliderPosition': [1, 1]})
