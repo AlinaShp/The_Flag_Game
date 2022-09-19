@@ -10,6 +10,7 @@ state = {'state': True,
          'soldier_rect': pygame.Rect(0, 0, consts.PLAYER_SIZE[0], consts.PLAYER_SIZE[1])}
 
 
+
 def main():
     clock = pygame.time.Clock()
     screen.style_game(consts.GREEN, state['soldier_rect'], state['grass'], "Welcome to The Flag game. Have Fun!")
@@ -22,6 +23,10 @@ def main():
             elif event.type == pygame.KEYDOWN or event.type == pygame.KEYUP:
                 Soldier.soldier_move(key_pressed, state['soldier_rect'])
                 screen.style_game(consts.GREEN, state['soldier_rect'], state['grass'])
+                if screen.cond(key_pressed):
+                    print(screen.pressing_numbers(key_pressed))
+
+
 
             screen.screen_color_change(key_pressed, state['soldier_rect'], state['mine_field'], state['grass'])
 
@@ -33,6 +38,8 @@ def main():
             screen.message_screen("You lost :(")
             pygame.time.wait(3000)
             state['state'] = False
+
+
 
     pygame.quit()
 

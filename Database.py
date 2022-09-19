@@ -11,6 +11,7 @@ def init_file():
         df.to_csv(DB)
 
 
+
 def save_game_in_file(game_data, key_pressed_num):
     """
     save new game

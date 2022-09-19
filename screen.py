@@ -1,11 +1,14 @@
 import os.path
 import pygame
 import consts
+import keyboard
+import time
 
 
 def create_img_obj(img_name, img_size):
     img = pygame.image.load(os.path.join(img_name))
     return pygame.transform.scale(img, img_size)
+
 
 # general board
 pygame.init()
@@ -28,7 +31,7 @@ def style_game(color, soldier_rect, grass_field, msg=''):
     WIN.blit(FLAG_OBJ, (consts.FLAG_LOCATION[0], consts.FLAG_LOCATION[1]))
     draw_objects(grass_field, GRASS_OBJ, consts.GRASS)
     msg_text_surface = START_MSG_FONT.render(msg, False, consts.WHITE)
-    WIN.blit(msg_text_surface, (consts.PLAYER_IMG_SIZE[0],0))
+    WIN.blit(msg_text_surface, (consts.PLAYER_IMG_SIZE[0], 0))
     pygame.display.update()
 
 
@@ -61,9 +64,39 @@ def make_grid():
     pygame.display.update()
 
 
+def pressing_numbers(key_pressed):
+
+    while True:
+        a = keyboard.read_event()
+        if a.event_type == "down":  # If any button is pressed (Not talking about released) then wait for it to be released
+            t = time.time()  # Getting time in sec
+            b = keyboard.read_event()
+            while not b.event_type == "up" and b.name == a.name:  # Loop till the key event doesn't matches the old one
+                b = keyboard.read_event()
+            return time.time() - t
+def cond(key_pressed):
+    if key_pressed[pygame.K_1] or key_pressed[pygame.K_2] or key_pressed[pygame.K_3] or \
+            key_pressed[pygame.K_4] or key_pressed[pygame.K_5] or \
+            key_pressed[pygame.K_6] or key_pressed[pygame.K_7] or \
+            key_pressed[pygame.K_8] or key_pressed[pygame.K_9]:
+        return True
+    return False
+
+
 def draw_objects(field, img_obj, obj_const):
     for row in range(consts.SCREEN_GRID_HEIGHT):
         for col in range(consts.SCREEN_GRID_WIDTH):
             if field[row][col] == obj_const:
-                WIN.blit(img_obj,(col * consts.CELL_SIZE, row * consts.CELL_SIZE))
+                WIN.blit(img_obj,
+                         (col * consts.CELL_SIZE, row * consts.CELL_SIZE))
     pygame.display.update()
+
+
+def main1():
+    key_pressed = pygame.key.get_pressed()
+    #print(cond(key_pressed))
+    #print(pressing_numbers(key_pressed))
+
+
+if __name__ == '__main__':
+    main1()
