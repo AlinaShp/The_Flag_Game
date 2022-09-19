@@ -1,43 +1,62 @@
-import pandas
 import os
 import json
+import pandas as pd
 
-DATA_BASE_NAME = 'dataBase.csv'
-
-
-def init_data_base():
-    if not os.path.exists(DATA_BASE_NAME):
-        df = pandas.DataFrame()
-        df.to_csv(DATA_BASE_NAME, columns=['num_button_pressed','mine_field','grass','soliderPosition'], mode='w')
+DB = 'BD.csv'
 
 
-
-def convert_data_lists_to_srt(game_data):
-    for key in game_data.keys():
-        if type(game_data[key]) is list:
-            game_data[key] = json.dumps(game_data[key])
-    return game_data
+def init_file():
+    if not os.path.exists(DB):
+        df = pd.DataFrame(columns=['Grass', 'LendMines', 'SoliderPlace'], index=[x for x in range(1, 10)])
+        df.to_csv(DB)
 
 
-def save_game(game_data):
-    game_data = convert_data_lists_to_srt(game_data)
-    new_data_frame = pandas.DataFrame([game_data])
-    df = pandas.read_csv(DATA_BASE_NAME)
-    if (df['num_button_pressed'] == game_data['num_button_pressed']).any():
-        df.drop(index=df[df['num_button_pressed'] == game_data['num_button_pressed']].index, inplace=True)
-        df.to_csv(DATA_BASE_NAME, mode='w', header=False)
-    new_data_frame.to_csv(DATA_BASE_NAME, mode='a', header=False)
+def save_game_in_file(game_data, key_pressed_num):
+    """
+    save new game
+    :param game_data: list of str objects  ['Grass', 'LendMines', 'SoliderPlace']
+    :param key_pressed_num: int of key pressed, func is not responsible to check value
+    :return: None
+    """
+    df = pd.read_csv(DB, index_col=0)
+    df.loc[key_pressed_num] = game_data
+    df.to_csv(DB)
 
 
-def get_game(num_button_pressed):
-    df = pandas.read_csv(DATA_BASE_NAME)
-    df2 = df[df['num_button_pressed'] == num_button_pressed]
-    print(df2.to_string())
+def get_saved_game_from_file(key_pressed_num):
+    key_pressed_num -= 1 # all indexes +1
+    df = pd.read_csv(DB, index_col=0)
+    df = df.iloc[key_pressed_num]
+    list_game_data = df.values.tolist()
+    if type(list_game_data[0]) is str:
+        return list_game_data
+    else: # nan var exist row is empty
+        return False
 
 
-init_data_base()
-# save_game({'num_button_pressed':0,'mine_field':[[1,1], [1,1]],'grass':[[1,1], [1,1]],'soliderPosition':[1,1]})
-# save_game({'num_button_pressed':1,'mine_field':[[1,1], [1,1]],'grass':[[1,1], [1,1]],'soliderPosition':[1,1]})
-# # # #get_game(0)
-# # d = pandas.read_csv(DATA_BASE_NAME)
-# print(df)
+def convert_list_items_to_str(data):
+    for i in range(len(data)):
+        data[i] = json.dumps(data[i])
+
+
+def convert_list_items_to_list(data):
+    for i in range(len(data)):
+        data[i] = json.loads(data[i])
+
+
+def main():
+
+    game = [[[1,1,0],[1,1,0]],[[1,1,0],[1,1,0]],[1,2]]
+    key_pressed = 1
+    convert_list_items_to_str(game)
+
+    init_file()
+    save_game_in_file(game,key_pressed)
+
+    game_r = get_saved_game_from_file(key_pressed)
+    convert_list_items_to_list(game_r)
+    print(game_r)
+
+
+if __name__ == '__main__':
+    main()
