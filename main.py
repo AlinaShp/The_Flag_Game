@@ -5,18 +5,14 @@ import Soldier
 import MineField
 
 state = {'state': True,
-         'mine_field': MineField.init_mine_field(MineField.MINE_FIELD_MATRIX,
-                                                 consts.MINE_FILE,
-                                                 consts.NUM_LAND_MINES),
-         'grass': MineField.init_mine_field(MineField.GRASS_FIELD_MATRIX,
-                                            consts.GRASS, consts.NUM_GRASS),
-         'soldier_rect': pygame.Rect(0, 0, consts.PLAYER_SIZE[0],
-                                        consts.PLAYER_SIZE[1])}
+         'mine_field': MineField.init_mine_field(consts.LAND_MINE, consts.NUM_LAND_MINES),
+         'grass': MineField.init_mine_field(consts.GRASS, consts.NUM_GRASS),
+         'soldier_rect': pygame.Rect(0, 0, consts.PLAYER_SIZE[0], consts.PLAYER_SIZE[1])}
 
 
 def main():
     clock = pygame.time.Clock()
-    screen.begin_msg()
+    #screen.begin_msg()
     screen.style_game(consts.GREEN, state['soldier_rect'], state['grass'], "Welcome to The Flag game. Have Fun!")
     while state['state']:
         clock.tick(consts.FPS)

@@ -2,6 +2,7 @@ import pygame
 import consts
 import MineField
 
+
 def soldier_move(key_pressed, soldier_rect):
     if key_pressed[pygame.K_DOWN] and soldier_rect.y + consts.PLAYER_IMG_SIZE[0] < consts.SCREEN_HEIGHT:
         soldier_rect.y += consts.CELL_SIZE
@@ -19,9 +20,7 @@ def player_win(player_x, player_y):
 
 
 def get_feet_position(soldier_x, soldier_y):
-    feet_x = soldier_x
-    feet_y = soldier_y + consts.PLAYER_SIZE[1] - consts.CELL_SIZE
-    return feet_x, feet_y
+    return soldier_x, (soldier_y + consts.PLAYER_SIZE[1] - consts.CELL_SIZE)
 
 
 def did_hit_lend_mine(solider_feet_position, mine_position):
@@ -34,7 +33,7 @@ def player_loss(land_mains_matrix, solider_position_x, solider_position_y):
     feet_x, feet_y = get_feet_position(solider_position_x, solider_position_y)
     for row in range(consts.SCREEN_GRID_HEIGHT):
         for col in range(consts.SCREEN_GRID_WIDTH):
-            if land_mains_matrix[row][col] == consts.MINE_FILE:
+            if land_mains_matrix[row][col] == consts.LAND_MINE:
                 if did_hit_lend_mine([feet_x, feet_y], MineField.get_lend_mine_position(row, col)):
                     return True
     return False
