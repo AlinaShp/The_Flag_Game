@@ -17,12 +17,12 @@ field_names = ['key_pressed', 'mine_field', 'grass',
                'soliderPosition']
 
 
-def init_data_base():
+def init_data_base(game_data):
     if not os.path.exists(DATA_BASE_NAME):
         df = pandas.DataFrame(data,
                               columns=['key_pressed', 'mine_field', 'grass',
                                        'soliderPosition'])
-        df.to_csv('database.csv',  mode='w', header=True, index=False)
+        df.to_csv('database.csv', mode='w', header=True, index=False)
 
 
 def convert_data_lists_to_srt(game_data):
@@ -33,15 +33,17 @@ def convert_data_lists_to_srt(game_data):
 
 
 def save_game(game_data):
-    #game_data_bs = convert_data_lists_to_srt(game_data)
-    #print(game_data_bs)
+    # game_data_bs = convert_data_lists_to_srt(game_data)
+    # print(game_data_bs)
 
-# זה מכניס אבל נראה מוזר בהדפסה
-    df2 = pandas.DataFrame(game_data)
-    df2.to_csv('database.csv', mode='a', header=False, index=False)
-    print(df2)
+    # זה מכניס אבל נראה מוזר בהדפסה
+    # df = pandas.DataFrame(game_data)
+    # df2.to_csv('database.csv', mode='a', header=False, index=False)
 
-    """with open('database.csv', 'a') as f_object:
+    """df.loc[len(df.index)] = ['Amy', '89', "93", "h"]
+    print(df)"""
+
+    with open('database.csv', 'a') as f_object:
         # Pass the file object and a list
         # of column names to DictWriter()
         # You will get a object of DictWriter
@@ -53,7 +55,8 @@ def save_game(game_data):
         # Close the file object
         f_object.close()
         print()
-"""
+
+
 
 """def save_game(game_data, num_button_pressed):
     game_data = convert_data_lists_to_srt(game_data)
@@ -72,10 +75,9 @@ def save_game(game_data):
         df.to_csv(DATA_BASE_NAME, mode='w', header=False)
     new_data_frame.to_csv(DATA_BASE_NAME, mode='a', header=False)"""
 
-init_data_base()
+# init_data_base()
 
 save_game({'key_pressed': 4, 'mine_field': [[1, 1], [1, 1]],
-           'grass': [[1, 1], [1, 1]], 'soliderPosition': [1, 1]})
+                'grass': [[1, 1], [1, 1]], 'soliderPosition': [1, 1]})
 save_game({'key_pressed': 3, 'mine_field': [[2, 2], [2, 2]],
-           'grass': [[2, 2], [2, 2]], 'soliderPosition': [1, 1]})
-
+                'grass': [[2, 2], [2, 2]], 'soliderPosition': [1, 1]})
