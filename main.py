@@ -12,7 +12,6 @@ state = {'state': True,
 
 def main():
     clock = pygame.time.Clock()
-    #screen.begin_msg()
     screen.style_game(consts.GREEN, state['soldier_rect'], state['grass'], "Welcome to The Flag game. Have Fun!")
     while state['state']:
         clock.tick(consts.FPS)

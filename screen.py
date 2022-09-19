@@ -3,8 +3,8 @@ import pygame
 import consts
 
 
-def create_img_obj(img_path, img_size):
-    img = pygame.image.load(os.path.join(img_path))
+def create_img_obj(img_name, img_size):
+    img = pygame.image.load(os.path.join(img_name))
     return pygame.transform.scale(img, img_size)
 
 # general board
@@ -27,16 +27,9 @@ def style_game(color, soldier_rect, grass_field, msg=''):
     WIN.blit(SOLDIER_OBJ, (soldier_rect.x, soldier_rect.y))
     WIN.blit(FLAG_OBJ, (consts.FLAG_LOCATION[0], consts.FLAG_LOCATION[1]))
     draw_objects(grass_field, GRASS_OBJ, consts.GRASS)
-    #draw_grass(grass_field)
     msg_text_surface = START_MSG_FONT.render(msg, False, consts.WHITE)
     WIN.blit(msg_text_surface, (consts.PLAYER_IMG_SIZE[0],0))
     pygame.display.update()
-
-
-# def begin_msg():
-#     font = pygame.font.Font(None, 30)
-#     text_surface = font.render('Welcome to the flag game\n Have fun!', False, consts.WHITE)
-#     WIN.blit(text_surface, (80, 0))
 
 
 def style_game_black(color, soldier_rect):
@@ -50,7 +43,6 @@ def screen_color_change(key_pressed, soldier_rect, mine_field, grass_field):
         style_game_black(consts.BLACK, soldier_rect)
         make_grid()
         draw_objects(mine_field, MINE_OBJ, consts.LAND_MINE)
-        #draw_mines(mine_field)
         pygame.time.wait(1000)
         style_game(consts.GREEN, soldier_rect, grass_field)
 
@@ -67,22 +59,6 @@ def make_grid():
         pygame.draw.line(WIN, consts.WHITE, (0, i), (consts.SCREEN_WIDTH, i))
         pygame.draw.line(WIN, consts.WHITE, (i, 0), (i, consts.SCREEN_WIDTH))
     pygame.display.update()
-
-
-# def draw_mines(mine_field):
-#     for row in range(consts.SCREEN_GRID_HEIGHT):
-#         for col in range(consts.SCREEN_GRID_WIDTH):
-#             if mine_field[row][col] == consts.MINE_FILE:
-#                 WIN.blit(MINE_OBJ,(col * consts.CELL_SIZE, row * consts.CELL_SIZE))
-#     pygame.display.update()
-
-
-# def draw_grass(grass_field):
-#     for row in range(consts.SCREEN_GRID_HEIGHT):
-#         for col in range(consts.SCREEN_GRID_WIDTH):
-#             if grass_field[row][col] == consts.GRASS:
-#                 WIN.blit(GRASS_OBJ,(col * consts.CELL_SIZE, row * consts.CELL_SIZE))
-#     pygame.display.update()
 
 
 def draw_objects(field, img_obj, obj_const):
