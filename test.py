@@ -3,44 +3,30 @@ import os
 import random
 import json
 
+DATA_BASE_NAME = 'dataBase.csv'
+data = {'key_pressed': [None],
+         'mine_field': [None],
+         'grass': [None],
+         'soliderPosition': [None]}
 
-def convert_data_lists_to_srt(game_data):
-    game_data = json.dumps(game_data)
-
-    return game_data
-def main2():
-    data = [('Peter', 18, 7),
-            ('Riff', 15, 6),
-            ('John', 17, 8),
-            ('Michel', 18, 7),
-            ('Sheli', 17, 5)]
-    data2=[('hhhhh', 18, 7),
-            ('hhh', 15, 6),
-            ('hhh', 17, 8),
-            ('Michel', 18, 7),
-            ('Sheli', 17, 5)]
-    emptylist = []
-    string=""
-
-    list1=convert_data_lists_to_srt(data)
-    list2=convert_data_lists_to_srt(data2)
-
-    for row in range (len(data)):
-        for col in range(len(data[row])):
-            string=string+str(data[row][col])+","
-            emptylist.append(string)
-
-  #  print(emptylist)
-    list=[list1], [list2]
-
-   # print(list)
-    string=""
-
-   # print(emptylist)
+"""raw = {'first_name': ['Sheldon', 'Raj', 'Leonard', 'Howard', 'Amy'],
+                'last_name': ['Copper', 'Koothrappali', 'Hofstadter', 'Wolowitz', 'Fowler'],
+                'age': [42, 38, 36, 41, 35],
+                'Comedy_Score': [9, 7, 8, 8, 5],
+                'Rating_Score': [25, 25, 49, 62, 70]}
 
 
-    df = pd.DataFrame(list)
-    print(df)
+df = pd.DataFrame(raw, columns=['first_name', 'last_name', 'age',
+                                         'Comedy_Score', 'Rating_Score'])
+df.to_csv('raw.csv', index=False)
+print(df)"""
+def init_data_base():
+    if not os.path.exists(DATA_BASE_NAME):
+        df = pd.DataFrame(data, columns=['key_pressed', 'mine_field', 'grass',
+                                        'soliderPosition'])
+        df.to_csv('database.csv', index=False)
 
-if __name__ == '__main__':
-    main2()
+init_data_base()
+
+
+
