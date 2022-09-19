@@ -10,6 +10,7 @@ state = {'state': True,
          'soldier_rect': pygame.Rect(0, 0, consts.PLAYER_SIZE[0], consts.PLAYER_SIZE[1])}
 
 
+
 def main():
     clock = pygame.time.Clock()
     screen.style_game(consts.GREEN, state['soldier_rect'], state['grass'], "Welcome to The Flag game. Have Fun!")
@@ -37,6 +38,8 @@ def main():
             screen.message_screen("You lost :(")
             pygame.time.wait(3000)
             state['state'] = False
+
+
 
     pygame.quit()
 
