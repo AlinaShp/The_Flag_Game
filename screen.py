@@ -3,9 +3,10 @@ import pygame
 import consts
 
 
-def create_img_obj(img_path, img_size):
-    img = pygame.image.load(os.path.join(img_path))
+def create_img_obj(img_name, img_size):
+    img = pygame.image.load(os.path.join(img_name))
     return pygame.transform.scale(img, img_size)
+
 
 # general board
 pygame.init()
@@ -27,16 +28,9 @@ def style_game(color, soldier_rect, grass_field, msg=''):
     WIN.blit(SOLDIER_OBJ, (soldier_rect.x, soldier_rect.y))
     WIN.blit(FLAG_OBJ, (consts.FLAG_LOCATION[0], consts.FLAG_LOCATION[1]))
     draw_objects(grass_field, GRASS_OBJ, consts.GRASS)
-    #draw_grass(grass_field)
     msg_text_surface = START_MSG_FONT.render(msg, False, consts.WHITE)
-    WIN.blit(msg_text_surface, (consts.PLAYER_IMG_SIZE[0],0))
+    WIN.blit(msg_text_surface, (consts.PLAYER_IMG_SIZE[0], 0))
     pygame.display.update()
-
-
-# def begin_msg():
-#     font = pygame.font.Font(None, 30)
-#     text_surface = font.render('Welcome to the flag game\n Have fun!', False, consts.WHITE)
-#     WIN.blit(text_surface, (80, 0))
 
 
 def style_game_black(color, soldier_rect):
@@ -68,10 +62,16 @@ def make_grid():
     pygame.display.update()
 
 
+def pressing_numbers(key_pressed, key_state):
+   # if key_pressed == pygame.K_1 or key_pressed == pygame.K_2 or key_pressed == pygame.K_3 or key_pressed == pygame.K_4 or key_pressed == pygame.K_5 or key_pressed == pygame.K_6 or key_pressed == pygame.K_7 or key_pressed == pygame.K_8  or key_pressed == pygame.K_9:
+    if key_state[pygame.K_1]:
+        print("k1")
+
 
 def draw_objects(field, img_obj, obj_const):
     for row in range(consts.SCREEN_GRID_HEIGHT):
         for col in range(consts.SCREEN_GRID_WIDTH):
             if field[row][col] == obj_const:
-                WIN.blit(img_obj,(col * consts.CELL_SIZE, row * consts.CELL_SIZE))
+                WIN.blit(img_obj,
+                         (col * consts.CELL_SIZE, row * consts.CELL_SIZE))
     pygame.display.update()
