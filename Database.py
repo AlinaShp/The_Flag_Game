@@ -45,4 +45,4 @@ def convert_list_items_to_list(data):
     for i in range(len(data)):
         data[i] = json.loads(data[i])
 
-print(get_saved_game_from_file(1))
+
