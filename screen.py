@@ -42,12 +42,15 @@ def style_game_black(color, soldier_rect):
 
 
 def screen_color_change(key_pressed, soldier_rect, mine_field, grass_field):
-    if key_pressed[pygame.K_RETURN]:
-        style_game_black(consts.BLACK, soldier_rect)
-        make_grid()
-        draw_objects(mine_field, MINE_OBJ, consts.LAND_MINE)
-        pygame.time.wait(1000)
-        style_game(consts.GREEN, soldier_rect, grass_field)
+    style_game_black(consts.BLACK, soldier_rect)
+    make_grid()
+    draw_objects(mine_field, MINE_OBJ, consts.LAND_MINE)
+    pygame.time.wait(1000)
+    pygame.event.clear()
+    style_game(consts.GREEN, soldier_rect, grass_field)
+
+
+
 
 
 def message_screen(str_state):

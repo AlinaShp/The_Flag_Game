@@ -49,12 +49,13 @@ def main():
                     screen.style_game(consts.GREEN, state['soldier_rect'], state['grass'])
                 elif screen.is_num_pressed(event.key):
                     state['start_time'] = time.time()
+                elif event.key == pygame.K_RETURN:
+                    screen.screen_color_change(key_pressed, state['soldier_rect'], state['mine_field'], state['grass'])
             elif event.type == pygame.KEYUP:
                 if screen.is_num_pressed(event.key):
                     end_time = time.time()
                     check_time_update_data(state['start_time'] - end_time, event.key)
 
-            screen.screen_color_change(key_pressed, state['soldier_rect'], state['mine_field'], state['grass'])
 
         if Soldier.player_win(state['soldier_rect'].x, state['soldier_rect'] .y):
             screen.message_screen("YOU WON!")
