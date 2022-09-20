@@ -4,14 +4,21 @@ import MineField
 
 
 def soldier_move(key_pressed, soldier_rect):
-    if key_pressed[pygame.K_DOWN] and soldier_rect.y + consts.PLAYER_IMG_SIZE[0] < consts.SCREEN_HEIGHT:
+    if key_pressed == pygame.K_DOWN and soldier_rect.y + consts.PLAYER_IMG_SIZE[0] < consts.SCREEN_HEIGHT:
         soldier_rect.y += consts.CELL_SIZE
-    if key_pressed[pygame.K_UP] and soldier_rect.y > 0:
+        return True
+    elif key_pressed == pygame.K_UP and soldier_rect.y > 0:
         soldier_rect.y -= consts.CELL_SIZE
-    if key_pressed[pygame.K_LEFT] and soldier_rect.x > 0:
+        return True
+    elif key_pressed == pygame.K_LEFT and soldier_rect.x > 0:
         soldier_rect.x -= consts.CELL_SIZE
-    if key_pressed[pygame.K_RIGHT] and soldier_rect.x + consts.PLAYER_IMG_SIZE[0] < consts.SCREEN_WIDTH:
+        return True
+    elif key_pressed == pygame.K_RIGHT and soldier_rect.x + consts.PLAYER_IMG_SIZE[0] < consts.SCREEN_WIDTH:
         soldier_rect.x += consts.CELL_SIZE
+        return True
+    else:
+        return False
+
 
 
 def player_win(player_x, player_y):

@@ -84,7 +84,6 @@ def cond(key_pressed):
         return True
     return False
 
-
 def draw_objects(field, img_obj, obj_const):
     for row in range(consts.SCREEN_GRID_HEIGHT):
         for col in range(consts.SCREEN_GRID_WIDTH):
@@ -92,6 +91,14 @@ def draw_objects(field, img_obj, obj_const):
                 WIN.blit(img_obj,
                          (col * consts.CELL_SIZE, row * consts.CELL_SIZE))
     pygame.display.update()
+
+
+def is_num_pressed(key):
+    return (key == pygame.K_1 or key == pygame.K_2 or key == pygame.K_3 or
+            key == pygame.K_4 or key == pygame.K_5 or key == pygame.K_6
+            or key == pygame.K_7 or key == pygame.K_8 or key == pygame.K_9)
+
+
 
 
 def main1():

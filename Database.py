@@ -11,7 +11,6 @@ def init_file():
         df.to_csv(DB)
 
 
-
 def save_game_in_file(game_data, key_pressed_num):
     """
     save new game
@@ -19,6 +18,7 @@ def save_game_in_file(game_data, key_pressed_num):
     :param key_pressed_num: int of key pressed, func is not responsible to check value
     :return: None
     """
+    convert_list_items_to_str(game_data)
     df = pd.read_csv(DB, index_col=0)
     df.loc[key_pressed_num] = game_data
     df.to_csv(DB)
@@ -30,6 +30,7 @@ def get_saved_game_from_file(key_pressed_num):
     df = df.iloc[key_pressed_num]
     list_game_data = df.values.tolist()
     if type(list_game_data[0]) is str:
+        convert_list_items_to_list(list_game_data)
         return list_game_data
     else: # nan var exist row is empty
         return False
@@ -44,20 +45,4 @@ def convert_list_items_to_list(data):
     for i in range(len(data)):
         data[i] = json.loads(data[i])
 
-
-def main():
-
-    game = [[[1,1,0],[1,1,0]],[[1,1,0],[1,1,0]],[1,2]]
-    key_pressed = 1
-    convert_list_items_to_str(game)
-
-    init_file()
-    save_game_in_file(game,key_pressed)
-
-    game_r = get_saved_game_from_file(key_pressed)
-    convert_list_items_to_list(game_r)
-    print(game_r)
-
-
-if __name__ == '__main__':
-    main()
+print(get_saved_game_from_file(1))
