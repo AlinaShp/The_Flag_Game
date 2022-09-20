@@ -9,6 +9,8 @@ state = {'state': True,
          'grass': MineField.init_mine_field(consts.GRASS, consts.NUM_GRASS),
          'soldier_rect': pygame.Rect(0, 0, consts.PLAYER_SIZE[0], consts.PLAYER_SIZE[1])}
 
+def time_check(time, key_pressed):
+    if time<
 
 
 def main():
@@ -27,8 +29,6 @@ def main():
 
                 Soldier.soldier_move(key_pressed, state['soldier_rect'])
                 screen.style_game(consts.GREEN, state['soldier_rect'], state['grass'])
-
-
 
             screen.screen_color_change(key_pressed, state['soldier_rect'], state['mine_field'], state['grass'])
 
