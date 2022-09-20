@@ -64,32 +64,11 @@ def make_grid():
     pygame.display.update()
 
 
-def pressing_numbers(key_pressed):
-    while True:
-        a = keyboard.read_event()
-        if a.event_type == "down":  # If any button is pressed (Not talking about released) then wait for it to be released
-            t = time.time()  # Getting time in sec
-            b = keyboard.read_event()
-            while not b.event_type == "up" and b.name == a.name:  # Loop till the key event doesn't matches the old one
-                b = keyboard.read_event()
-            return time.time() - t
-
-
-def cond(key_pressed):
-    if key_pressed[pygame.K_1] or key_pressed[pygame.K_2] or key_pressed[
-        pygame.K_3] or \
-            key_pressed[pygame.K_4] or key_pressed[pygame.K_5] or \
-            key_pressed[pygame.K_6] or key_pressed[pygame.K_7] or \
-            key_pressed[pygame.K_8] or key_pressed[pygame.K_9]:
-        return True
-    return False
-
 def draw_objects(field, img_obj, obj_const):
     for row in range(consts.SCREEN_GRID_HEIGHT):
         for col in range(consts.SCREEN_GRID_WIDTH):
             if field[row][col] == obj_const:
-                WIN.blit(img_obj,
-                         (col * consts.CELL_SIZE, row * consts.CELL_SIZE))
+                WIN.blit(img_obj, (col * consts.CELL_SIZE, row * consts.CELL_SIZE))
     pygame.display.update()
 
 
@@ -100,14 +79,3 @@ def is_num_pressed(key):
 
 
 
-
-def main1():
-    key_pressed = pygame.key.get_pressed()
-    #print(pygame.key.name(key_pressed))
-    for i in range(4):
-        if cond(key_pressed):
-            print(pressing_numbers(pygame.K_1))
-
-
-if __name__ == '__main__':
-    main1()

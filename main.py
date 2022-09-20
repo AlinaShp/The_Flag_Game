@@ -1,6 +1,4 @@
 import pygame
-
-import Database
 import screen
 import consts
 import Soldier
@@ -8,56 +6,16 @@ import MineField
 import time
 
 state = {'state': True,
-         'mine_field': MineField.init_mine_field(consts.LAND_MINE,
-                                                 consts.NUM_LAND_MINES),
+         'mine_field': MineField.init_mine_field(consts.LAND_MINE, consts.NUM_LAND_MINES),
          'grass': MineField.init_mine_field(consts.GRASS, consts.NUM_GRASS),
-         'soldier_rect': pygame.Rect(0, 0, consts.PLAYER_SIZE[0],
-                                     consts.PLAYER_SIZE[1]),
+         'soldier_rect': pygame.Rect(0, 0, consts.PLAYER_SIZE[0], consts.PLAYER_SIZE[1]),
          'start_time': None}
-Database.init_file()
 
-def time_check(time, key_pressed):
-    game_data=[state['grass'], state['mine_field'], [state["soldier_rect"].x, state["soldier_rect"].y]]
-    if time < 1:
-        list = Database.get_saved_game_from_file(key_pressed-49)
-        save_parameters_to_main(list)
-        pygame.display.update()
-    else:
-        Database.save_game_in_file(game_data, key_pressed-48)
-
-
-def get_old_minefield(mines_index):
-    field = MineField.create_field()
-    for row in range(len(mines_index)):
-        for col in range(len(mines_index[row])):
-            x = mines_index[row][col]
-            y = mines_index[row][col]
-            field[x][y] = consts.LAND_MINE
-
-def get_old_grassfield(mines_index):
-    field = MineField.create_field()
-    for row in range(len(mines_index)):
-        for col in range(len(mines_index[row])):
-            x = mines_index[row][col]
-            y = mines_index[row][col]
-            field[x][y] = consts.LAND_MINE
-
-def save_parameters_to_main(list_game_data):
-    grass_index=list_game_data[0]
-    mines_index = list_game_data[1]
-    soldier_index = list_game_data[2]
-
-    state['soldier_rect'] = pygame.Rect(soldier_index[0], soldier_index[1],
-                                        consts.PLAYER_SIZE[0],
-                                        consts.PLAYER_SIZE[1])
-    state['mine_field'] = mines_index
-    state['grass'] = grass_index
 
 
 def main():
     clock = pygame.time.Clock()
-    screen.style_game(consts.GREEN, state['soldier_rect'], state['grass'],
-                      "Welcome to The Flag game. Have Fun!")
+    screen.style_game(consts.GREEN, state['soldier_rect'], state['grass'], "Welcome to The Flag game. Have Fun!")
 
     while state['state']:
         clock.tick(consts.FPS)
@@ -67,24 +25,20 @@ def main():
                 state['state'] = False
             elif event.type == pygame.KEYDOWN:
                 if Soldier.soldier_move(event.key, state['soldier_rect']):
-                    screen.style_game(consts.GREEN, state['soldier_rect'],
-                                      state['grass'])
+                    screen.style_game(consts.GREEN, state['soldier_rect'], state['grass'])
                 elif screen.is_num_pressed(event.key):
                     state['start_time'] = time.time()
             elif event.type == pygame.KEYUP:
                 if screen.is_num_pressed(event.key):
                     end_time = time.time()
-                    time_check(state['start_time']-end_time, event.key)
-            screen.screen_color_change(key_pressed, state['soldier_rect'],
-                                       state['mine_field'], state['grass'])
+                    print(state['start_time']-end_time)
+            screen.screen_color_change(key_pressed, state['soldier_rect'], state['mine_field'], state['grass'])
 
-        if Soldier.player_win(state['soldier_rect'].x,
-                              state['soldier_rect'].y):
+        if Soldier.player_win(state['soldier_rect'].x, state['soldier_rect'] .y):
             screen.message_screen("YOU WON!")
             pygame.time.wait(3000)
             state['state'] = False
-        elif Soldier.player_loss(state['mine_field'], state['soldier_rect'].x,
-                                 state['soldier_rect'].y):
+        elif Soldier.player_loss(state['mine_field'], state['soldier_rect'].x, state['soldier_rect'].y):
             screen.message_screen("You lost :(")
             pygame.time.wait(3000)
             state['state'] = False
