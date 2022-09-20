@@ -21,10 +21,12 @@ def main():
             if event.type == pygame.QUIT:
                 state['state'] = False
             elif event.type == pygame.KEYDOWN or event.type == pygame.KEYUP:
+                if screen.cond(key_pressed):
+                    print("Yes")
+                   # print(screen.pressing_numbers(key_pressed))
+
                 Soldier.soldier_move(key_pressed, state['soldier_rect'])
                 screen.style_game(consts.GREEN, state['soldier_rect'], state['grass'])
-                if screen.cond(key_pressed):
-                    print(screen.pressing_numbers(key_pressed))
 
 
 
