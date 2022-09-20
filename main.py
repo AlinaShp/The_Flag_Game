@@ -3,28 +3,35 @@ import screen
 import consts
 import Soldier
 import MineField
+import time
 
 state = {'state': True,
          'mine_field': MineField.init_mine_field(consts.LAND_MINE, consts.NUM_LAND_MINES),
          'grass': MineField.init_mine_field(consts.GRASS, consts.NUM_GRASS),
-         'soldier_rect': pygame.Rect(0, 0, consts.PLAYER_SIZE[0], consts.PLAYER_SIZE[1])}
+         'soldier_rect': pygame.Rect(0, 0, consts.PLAYER_SIZE[0], consts.PLAYER_SIZE[1]),
+         'start_time' : None}
 
 
 
 def main():
     clock = pygame.time.Clock()
     screen.style_game(consts.GREEN, state['soldier_rect'], state['grass'], "Welcome to The Flag game. Have Fun!")
+
     while state['state']:
         clock.tick(consts.FPS)
         key_pressed = pygame.key.get_pressed()
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 state['state'] = False
-            elif event.type == pygame.KEYDOWN or event.type == pygame.KEYUP:
-                Soldier.soldier_move(key_pressed, state['soldier_rect'])
-                screen.style_game(consts.GREEN, state['soldier_rect'], state['grass'])
-                if screen.cond(key_pressed):
-                    print(screen.pressing_numbers(key_pressed))
+            elif event.type == pygame.KEYDOWN:
+                if Soldier.soldier_move(event.key, state['soldier_rect']):
+                    screen.style_game(consts.GREEN, state['soldier_rect'], state['grass'])
+                elif screen.is_num_pressed(event.key):
+                    state['start_time'] = time.time()
+            elif event.type == pygame.KEYUP:
+                if screen.is_num_pressed(event.key):
+                    end_time = time.time()
+                    print(state['start_time']-end_time)
 
 
 
